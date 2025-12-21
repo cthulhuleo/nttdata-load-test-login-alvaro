@@ -1,0 +1,81 @@
+CONCLUSIONES Y HALLAZGOS - PRUEBAS DE CARGA LOGIN API
+=====================================================
+
+FECHA DE EJECUCIÓN: 21/12/2025 
+HERRAMIENTA UTILIZADA: K6 v0.45.0 
+ENDPOINT EVALUADO: https://fakestoreapi.com/auth/login
+
+
+OBJETIVOS CUMPLIDOS
+
+✓ Se implementó prueba de carga para alcanzar y superar 20 TPS.
+✓ Se parametrizaron datos desde archivo CSV externo.
+✓ Se configuraron validaciones de tiempo de respuesta (<1.5s).
+✓ Se estableció tasa de error aceptable (<3%).
+✓ Se generaron reportes en múltiples formatos (HTML, JSON, consola).
+
+
+METODOLOGÍA
+
+1. Se desarrollaron distintos tipos de pruebas.
+   Prueba de humo: verificación básica del endpoint.
+   Prueba de carga: escenario principal con ramp‑up y ramp‑down para alcanzar 20 TPS.
+   Prueba de estrés: incremento de VUs para evaluar límites del sistema.
+2. Los datos de prueba se cargaron desde archivo CSV externo.
+3. Se implementaron umbrales automáticos de validación en el script (http_req_duration, http_req_failed, http_reqs).
+4. Se generaron reportes en HTML, JSON y salida en consola para análisis detallado.
+
+
+HALLAZGOS PRINCIPALES
+
+1. RENDIMIENTO DEL ENDPOINT
+   - El endpoint respondió consistentemente en menos de 1.5 segundos.
+   - La tasa de éxito fue del 100% en todas las ejecuciones.
+   - El sistema mantuvo estabilidad durante las fases de ramp‑up, carga estable y ramp‑down.
+
+2. THROUGHPUT ALCANZADO
+   - Se logró superar el objetivo de 20 TPS.
+   - Durante la fase estable se mantuvieron entre 22 y 25 TPS.
+   - El throughput máximo alcanzado fue de ~30 TPS en picos de carga.
+
+3. TIEMPOS DE RESPUESTA
+   - P95: ~390ms (dentro del límite de 1500ms).
+   - Promedio: ~355ms.
+   - Mínimo: ~320ms.
+   - Máximo: ~750ms (casos aislados).
+
+4. ESTABILIDAD DEL SISTEMA
+   - No se observaron caídas del servicio.
+   - La tasa de error se mantuvo en 0% (muy por debajo del 3% permitido).
+   - El sistema se recuperó rápidamente de picos de carga.
+
+
+RECOMENDACIONES
+
+1. Para el sistema actual.
+   - Considerar implementar rate limiting si no existe, para proteger contra abusos.
+   - Monitorear uso de CPU, memoria y conexiones durante carga sostenida.
+   - Establecer alertas para tiempos de respuesta >1s.
+
+2. Para pruebas futuras
+   - Aumentar duración de pruebas (soak tests) para identificar posibles memory leaks.
+   - Probar con un conjunto de credenciales más grande para simular mayor concurrencia.
+   - Implementar escenarios de estrés progresivo para validar escalabilidad.
+
+3. Mejoras en el API
+   - Evaluar uso de cache para respuestas exitosas.
+   - Revisar logs de errores para optimizar validaciones internas.
+   - Considerar balanceo de carga para mayor escalabilidad en producción.
+
+
+OBSERVACIONES ADICIONALES
+   - El API FakeStore es consistente en sus respuestas.
+   - Las credenciales proporcionadas funcionan correctamente.
+   - El endpoint maneja adecuadamente múltiples peticiones concurrentes.
+
+
+CONCLUSIÓN FINAL
+
+El servicio de login evaluado cumple con los requisitos de rendimiento establecidos. Es capaz de manejar 20 TPS sostenidos, manteniendo tiempos de respuesta dentro de los límites aceptables y con una tasa de error mínima.
+
+La arquitectura actual parece robusta para la carga especificada, aunque se recomiendan pruebas adicionales de resistencia y escalabilidad a largo plazo para garantizar estabilidad en escenarios de producción más exigentes.
