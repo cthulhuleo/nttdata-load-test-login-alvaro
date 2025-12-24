@@ -47,6 +47,7 @@ El objetivo es validar rendimiento y estabilidad bajo escenarios de ramp-up y ra
 │       summary.json
 │       
 ├───scripts
+│       common-config.js
 │       helpers.js
 │       
 └───tests
@@ -55,6 +56,8 @@ El objetivo es validar rendimiento y estabilidad bajo escenarios de ramp-up y ra
         stress-test.js
 
 - `data/credentials.csv`: archivo con usuarios y contraseñas de prueba.
+- `data/credentials-data.json`: credenciales de usuario válidas para el API FakeStore.
+- `common-config.js`: funciones reutilizables.
 - `helpers.js`: funciones auxiliares para validación y métricas.
 - `login-smoke-test.js`: prueba de humo básica del endpoint.
 - `login-load-test.js`: escenario con ramp-up y ramp-down para alcanzar 20 TPS.
