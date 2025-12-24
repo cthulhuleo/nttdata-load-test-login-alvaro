@@ -23,7 +23,7 @@ export default function () {
     // URL del endpoint de login
     const url = 'https://fakestoreapi.com/auth/login';
 
-    // Seleccionar credenciales aleatorias
+    // Selecciona credenciales aleatorias
     const randomCredential = credentials[Math.floor(Math.random() * credentials.length)];
 
     // Headers de la petición
