@@ -88,15 +88,25 @@ El objetivo es validar rendimiento y estabilidad bajo escenarios de ramp-up y ra
 2. Ejecutar prueba.
    - Prueba de humo:
      k6 run tests/login-smoke-test.js
-   - Prueba de carga (20TPS)
+   - Prueba de carga (20TPS)/CSV (default)
      k6 run tests/login-load-test.js
+   - Prueba de carga (20TPS)/CSV explícito
+     k6 run -e DATA_FILE=../data/credentials.csv tests/login-load-test.js
+   - Prueba de carga (20TPS)/JSON
+     k6 run -e DATA_FILE=../data/credentials-data.json tests/login-load-test.js
    - Prueba de estrés
      k6 run tests/stress-test.js
 
-3. Al finalizar, se generan reportes en la carpeta reports/:
-   html-report.html
-   summary.json
-   results-<timestamp>.html
+3.  Ubicación de los reportes (E2E)
+   Al finalizar cualquier ejecución de k6, los reportes se generan automáticamente en la carpeta:
+    `reports/`
+   
+   Archivos principales:
+	- `reports/latest.html` → Reporte HTML de la última ejecución
+	- `reports/summary.json` → Resumen completo en formato JSON
+	- `reports/*.html` → Historial de ejecuciones (load, smoke y stress)
+
+Estos reportes pueden ser utilizados como evidencia E2E del comportamiento del sistema bajo carga.
 
 ---
 
