@@ -102,9 +102,9 @@ El objetivo es validar rendimiento y estabilidad bajo escenarios de ramp-up y ra
     `reports/`
    
    Archivos principales:
-	- `reports/latest.html` → Reporte HTML de la última ejecución
-	- `reports/summary.json` → Resumen completo en formato JSON
-	- `reports/*.html` → Historial de ejecuciones (load, smoke y stress)
+   - `reports/latest.html` → Reporte HTML de la última ejecución
+   - `reports/summary.json` → Resumen completo en formato JSON
+   - `reports/*.html` → Historial de ejecuciones (load, smoke y stress)
 
 Estos reportes pueden ser utilizados como evidencia E2E del comportamiento del sistema bajo carga.
 
